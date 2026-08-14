@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://teste.local/wsdl"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://teste.local/wsdl"
+    name="TesteSoapService">
+
+    <types>
+        <xsd:schema targetNamespace="http://teste.local/wsdl">
+            <xsd:element name="Ping">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="mensagem" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="PingResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="PingResult" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="PingInput">
+        <part name="parameters" element="tns:Ping"/>
+    </message>
+
+    <message name="PingOutput">
+        <part name="parameters" element="tns:PingResponse"/>
+    </message>
+
+    <portType name="TesteSoapPortType">
+        <operation name="Ping">
+            <input message="tns:PingInput"/>
+            <output message="tns:PingOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="TesteSoapBinding" type="tns:TesteSoapPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="Ping">
+            <soap:operation soapAction="http://teste.local/wsdl/Ping" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="TesteSoapService">
+        <port name="TesteSoapPort" binding="tns:TesteSoapBinding">
+            <soap:address location="https://example.com/soap"/>
+        </port>
+    </service>
+
+</definitions>
