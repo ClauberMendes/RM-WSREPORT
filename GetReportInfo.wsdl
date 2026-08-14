@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.totvs.com/"
+    targetNamespace="http://www.totvs.com/"
+    name="wsReport_GetReportInfo">
+
+    <wsdl:types>
+        <xsd:schema
+            targetNamespace="http://www.totvs.com/"
+            elementFormDefault="qualified">
+
+            <xsd:element name="GetReportInfo">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="codColigada" type="xsd:int"/>
+                        <xsd:element name="idReport" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="GetReportInfoResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="GetReportInfoResult" minOccurs="0">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                                </xsd:sequence>
+                                <xsd:anyAttribute processContents="lax"/>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="GetReportInfoInput">
+        <wsdl:part name="parameters" element="tns:GetReportInfo"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetReportInfoOutput">
+        <wsdl:part name="parameters" element="tns:GetReportInfoResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IwsReport_GetReportInfo">
+        <wsdl:operation name="GetReportInfo">
+            <wsdl:input
+                message="tns:GetReportInfoInput"
+                wsaw:Action="http://www.totvs.com/IwsReport/GetReportInfo"
+                xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+            <wsdl:output
+                message="tns:GetReportInfoOutput"
+                wsaw:Action="http://www.totvs.com/IwsReport/GetReportInfoResponse"
+                xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="RM_IwsReport_GetReportInfo" type="tns:IwsReport_GetReportInfo">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <wsdl:operation name="GetReportInfo">
+            <soap:operation
+                soapAction="http://www.totvs.com/IwsReport/GetReportInfo"
+                style="document"/>
+
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="wsReport_GetReportInfo">
+        <wsdl:port
+            name="RM_IwsReport_GetReportInfo"
+            binding="tns:RM_IwsReport_GetReportInfo">
+
+            <soap:address
+                location="http://sgehomolog.fiepi.com.br:8051/wsReport/IwsReport"/>
+
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
