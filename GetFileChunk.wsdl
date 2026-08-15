@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.totvs.com/"
+    targetNamespace="http://www.totvs.com/"
+    name="wsReport_GetFileChunk">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.totvs.com/" elementFormDefault="qualified">
+
+            <xsd:element name="GetFileChunk">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="guid" type="xsd:string"/>
+                        <xsd:element name="offset" type="xsd:long"/>
+                        <xsd:element name="length" type="xsd:long"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="GetFileChunkResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="GetFileChunkResult"
+                                     type="xsd:string"
+                                     minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="GetFileChunkInput">
+        <wsdl:part name="parameters" element="tns:GetFileChunk"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetFileChunkOutput">
+        <wsdl:part name="parameters" element="tns:GetFileChunkResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IwsReport_GetFileChunk">
+        <wsdl:operation name="GetFileChunk">
+            <wsdl:input message="tns:GetFileChunkInput"/>
+            <wsdl:output message="tns:GetFileChunkOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="RM_IwsReport_GetFileChunk"
+                  type="tns:IwsReport_GetFileChunk">
+
+        <soap:binding
+            transport="http://schemas.xmlsoap.org/soap/http"
+            style="document"/>
+
+        <wsdl:operation name="GetFileChunk">
+            <soap:operation
+                soapAction="http://www.totvs.com/IwsReport/GetFileChunk"
+                style="document"/>
+
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+    <wsdl:service name="wsReport_GetFileChunk">
+        <wsdl:port
+            name="RM_IwsReport_GetFileChunk"
+            binding="tns:RM_IwsReport_GetFileChunk">
+
+            <soap:address location="/wsReport/IwsReport"/>
+
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
