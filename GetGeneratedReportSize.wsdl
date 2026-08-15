@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.totvs.com/" targetNamespace="http://www.totvs.com/" name="wsReport_GetGeneratedReportSize">
+<wsdl:types><xsd:schema targetNamespace="http://www.totvs.com/" elementFormDefault="qualified">
+<xsd:element name="GetGeneratedReportSize"><xsd:complexType><xsd:sequence><xsd:element name="guid" type="xsd:string"/></xsd:sequence></xsd:complexType></xsd:element>
+<xsd:element name="GetGeneratedReportSizeResponse"><xsd:complexType><xsd:sequence><xsd:element name="GetGeneratedReportSizeResult" type="xsd:long" minOccurs="0"/></xsd:sequence></xsd:complexType></xsd:element>
+</xsd:schema></wsdl:types>
+<wsdl:message name="GetGeneratedReportSizeInput"><wsdl:part name="parameters" element="tns:GetGeneratedReportSize"/></wsdl:message>
+<wsdl:message name="GetGeneratedReportSizeOutput"><wsdl:part name="parameters" element="tns:GetGeneratedReportSizeResponse"/></wsdl:message>
+<wsdl:portType name="IwsReport_GetGeneratedReportSize"><wsdl:operation name="GetGeneratedReportSize"><wsdl:input message="tns:GetGeneratedReportSizeInput"/><wsdl:output message="tns:GetGeneratedReportSizeOutput"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="RM_IwsReport_GetGeneratedReportSize" type="tns:IwsReport_GetGeneratedReportSize"><soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/><wsdl:operation name="GetGeneratedReportSize"><soap:operation soapAction="http://www.totvs.com/IwsReport/GetGeneratedReportSize" style="document"/><wsdl:input><soap:body use="literal"/></wsdl:input><wsdl:output><soap:body use="literal"/></wsdl:output></wsdl:operation></wsdl:binding>
+<wsdl:service name="wsReport_GetGeneratedReportSize"><wsdl:port name="RM_IwsReport_GetGeneratedReportSize" binding="tns:RM_IwsReport_GetGeneratedReportSize"><soap:address location="/wsReport/IwsReport"/></wsdl:port></wsdl:service>
+</wsdl:definitions>
