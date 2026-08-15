@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.totvs.com/"
+    targetNamespace="http://www.totvs.com/"
+    name="wsReport_GenerateReport">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.totvs.com/" elementFormDefault="qualified">
+            <xsd:element name="GenerateReport">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="codColigada" type="xsd:int"/>
+                        <xsd:element name="id" type="xsd:int"/>
+                        <xsd:element name="filters" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="parameters" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="fileName" type="xsd:string"/>
+                        <xsd:element name="contexto" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="GenerateReportResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="GenerateReportResult" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="GenerateReportInput">
+        <wsdl:part name="parameters" element="tns:GenerateReport"/>
+    </wsdl:message>
+
+    <wsdl:message name="GenerateReportOutput">
+        <wsdl:part name="parameters" element="tns:GenerateReportResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IwsReport_GenerateReport">
+        <wsdl:operation name="GenerateReport">
+            <wsdl:input message="tns:GenerateReportInput"/>
+            <wsdl:output message="tns:GenerateReportOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="RM_IwsReport_GenerateReport" type="tns:IwsReport_GenerateReport">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <wsdl:operation name="GenerateReport">
+            <soap:operation
+                soapAction="http://www.totvs.com/IwsReport/GenerateReport"
+                style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="wsReport_GenerateReport">
+        <wsdl:port name="RM_IwsReport_GenerateReport" binding="tns:RM_IwsReport_GenerateReport">
+            <soap:address location="/wsReport/IwsReport"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
