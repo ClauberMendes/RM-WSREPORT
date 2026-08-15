@@ -76,7 +76,7 @@
             name="RM_IwsReport_GetFileChunk"
             binding="tns:RM_IwsReport_GetFileChunk">
 
-            <soap:address location="/wsReport/IwsReport"/>
+            <soap:address location="http://sgehomolog.fiepi.com.br:8051/wsReport/IwsReport"/>
 
         </wsdl:port>
     </wsdl:service>
