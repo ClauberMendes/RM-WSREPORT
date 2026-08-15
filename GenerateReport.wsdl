@@ -65,7 +65,7 @@
 
     <wsdl:service name="wsReport_GenerateReport">
         <wsdl:port name="RM_IwsReport_GenerateReport" binding="tns:RM_IwsReport_GenerateReport">
-            <soap:address location="/wsReport/IwsReport"/>
+            <soap:address location="http://sgehomolog.fiepi.com.br:8051/wsReport/IwsReport"/>
         </wsdl:port>
     </wsdl:service>
 
