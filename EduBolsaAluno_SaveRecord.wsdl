@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.totvs.com/"
+    targetNamespace="http://www.totvs.com/"
+    name="IwsDataServer">
+
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://www.totvs.com/">
+            <xs:element name="SaveRecord">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DataServerName" type="xs:string" minOccurs="0"/>
+                        <xs:element name="XML" type="xs:string" minOccurs="0"/>
+                        <xs:element name="Contexto" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="SaveRecordResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SaveRecordResult" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="SaveRecordSoapIn">
+        <wsdl:part name="parameters" element="tns:SaveRecord"/>
+    </wsdl:message>
+
+    <wsdl:message name="SaveRecordSoapOut">
+        <wsdl:part name="parameters" element="tns:SaveRecordResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IwsDataServer">
+        <wsdl:operation name="SaveRecord">
+            <wsdl:input message="tns:SaveRecordSoapIn"/>
+            <wsdl:output message="tns:SaveRecordSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="BasicHttpBinding_IwsDataServer" type="tns:IwsDataServer">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="SaveRecord">
+            <soap:operation soapAction="http://www.totvs.com/IwsDataServer/SaveRecord" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="wsDataServer">
+        <wsdl:port name="BasicHttpBinding_IwsDataServer" binding="tns:BasicHttpBinding_IwsDataServer">
+            <soap:address location="http://sgehomolog.fiepi.com.br:8051/wsDataServer/IwsDataServer"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
