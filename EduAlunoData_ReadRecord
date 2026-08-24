@@ -90,7 +90,7 @@
               binding="tns:BasicHttpBinding_IwsDataServer">
 
             <soap:address
-                location="https://SEU_SERVIDOR/wsDataServer/IwsDataServer"/>
+                location="https://sgehomolog.fiepi.com.br:8051/wsDataServer/IwsDataServer"/>
 
         </port>
 
