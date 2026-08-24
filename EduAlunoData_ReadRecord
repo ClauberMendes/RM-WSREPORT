@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://www.totvs.com/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.totvs.com/">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.totvs.com/" elementFormDefault="qualified">
+
+            <xsd:element name="ReadRecord">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="DataServerName"
+                                     type="xsd:string"
+                                     minOccurs="0"/>
+
+                        <xsd:element name="PrimaryKey"
+                                     type="xsd:string"
+                                     minOccurs="0"/>
+
+                        <xsd:element name="Contexto"
+                                     type="xsd:string"
+                                     minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="ReadRecordResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ReadRecordResult"
+                                     type="xsd:string"
+                                     minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </types>
+
+    <message name="ReadRecordSoapIn">
+        <part name="parameters"
+              element="tns:ReadRecord"/>
+    </message>
+
+    <message name="ReadRecordSoapOut">
+        <part name="parameters"
+              element="tns:ReadRecordResponse"/>
+    </message>
+
+    <portType name="IwsDataServer">
+
+        <operation name="ReadRecord">
+            <input message="tns:ReadRecordSoapIn"/>
+            <output message="tns:ReadRecordSoapOut"/>
+        </operation>
+
+    </portType>
+
+    <binding name="BasicHttpBinding_IwsDataServer"
+             type="tns:IwsDataServer">
+
+        <soap:binding
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <operation name="ReadRecord">
+
+            <soap:operation
+                soapAction="http://www.totvs.com/IwsDataServer/ReadRecord"
+                style="document"/>
+
+            <input>
+                <soap:body use="literal"/>
+            </input>
+
+            <output>
+                <soap:body use="literal"/>
+            </output>
+
+        </operation>
+
+    </binding>
+
+    <service name="wsDataServer">
+
+        <port name="BasicHttpBinding_IwsDataServer"
+              binding="tns:BasicHttpBinding_IwsDataServer">
+
+            <soap:address
+                location="https://SEU_SERVIDOR/wsDataServer/IwsDataServer"/>
+
+        </port>
+
+    </service>
+
+</definitions>
